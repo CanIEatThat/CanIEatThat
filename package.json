@@ -1,0 +1,31 @@
+{
+  "name": "gout",
+  "version": "1.0.0",
+  "description": "Tool to help Gout patients identify what they can and cannot eat",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --use_strict index.js",
+    "bundle": "webpack",
+    "test": "console.log(\"hello\");"
+  },
+  "author": "Maude Mensah Simpson and Ian Maynard",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "nodemon": "^1.11.0",
+    "webpack": "^3.4.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "material-ui": "^0.18.7",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-tap-event-plugin": "^2.0.1",
+    "validator": "^8.0.0",
+    "webpack": "^3.4.1"
+  }
+}
