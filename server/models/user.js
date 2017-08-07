@@ -26,7 +26,7 @@ UserSchema.pre('save', function saveHook(next) {
 
         return bcrypt.hash(user.password, salt, (hashError, hash) => {
             if (hashError) { return next(hashError); }
-            //replace pass with hash value
+            //replace password with hash value to save in the database
             user.password = hash;
             return next;
         });
