@@ -29,11 +29,42 @@ class LoginPage extends React.Component {
    * @param {object} event - the JavaScript event object
    */
   processForm(event) {
-    // prevent default action. in this case, action is the form submission event
+    {/* prevent default action. in this case, action is the form submission event*/}
     event.preventDefault();
 
-    console.log('email:', this.state.user.email);
-    console.log('password:', this.state.user.password);
+    const email = encodeURIComponent(this.state.user.email);
+    const password = encodeURIComponent(this.state.user.password);
+    const formData = `email=${email}&password=${password}`;
+  
+
+  {/* create an AJAX request*/}
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', '/auth/login');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+      if (xhr.status === 200) {
+       
+
+        {/* change the component-container state*/}
+        this.setState({
+          errors: {}
+        });
+
+        console.log('The form is valid');
+      } else {
+        
+
+        {/* change the component state*/}
+        const errors = xhr.response.errors ? xhr.response.errors: {};
+        errors.summary = xhr.response.message;
+
+        this.setState({
+          errors
+        });
+      }
+    });
+    xhr.send(formData);
   }
 
   /**
