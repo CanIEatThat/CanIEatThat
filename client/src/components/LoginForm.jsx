@@ -9,6 +9,7 @@ const LoginForm = ({
   onSubmit,
   onChange,
   errors,
+  successMessage,
   user
 }) => (
   <Card className="container">
@@ -51,6 +52,7 @@ LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
+  successMessage: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired
 };
 

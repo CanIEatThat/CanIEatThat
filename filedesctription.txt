@@ -1,0 +1,50 @@
+A short description of all the files in the app so far.
+
+.jsx is a react file, .js is strictly jscript
+
+
+
+-client
+    -src
+        -components: all the components and how they look (html) with links between pages. 
+            
+
+        -containers: the "pages" that the components make. the functionality of components is here.  i  tried to make as many notes about what does what inside each file. 
+        
+        -modules:
+            -moduleAuth: a file for user authentication.  Each user is assigned a token that is save in local storage when the user is signed in, and deleted when the user logs out
+        
+        -app.jsx: all the requirements and routes for ReactDOM.render.  I think this will stay untouched since the routes and browser history are doing all the heavy lifting.
+
+        -routes: an object of all the url paths used in the app. 
+
+-config
+    -index.js: this is supposed to store the user's password in mongo as a encrypted string somehow. 
+
+-node_modules
+
+-server:
+    -models: all the mongoose! add your schema here and route to it.
+        -api.js: where mongoose is started.  this code would usually be in the server.js
+
+        -user.js: schema storing user name, email, and password
+
+    -passort: 
+        -local-login.js: validation for the login page using passport.js.  makes sure the email address is really and email, pass is 8 char, etc
+
+        -local-signup: validation for the signup page using passport.js. akes sure the email address is really and email, pass is 8 char, etc
+
+    -routes: all of the CRUD routes go here.  just make a new file 
+        -api.js:  don't kno whow to explain this one.  see file for more notes.
+
+        -auth.js: i think this one makes ajax calls for user login and signup
+
+    -static: all the static files.
+        -css
+            -style.css
+        
+        -index.html: the html that shows the react
+
+-package.json
+-read.me 
+-webpack.config.js
