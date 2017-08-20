@@ -3,8 +3,8 @@ import SignUpForm from '../components/SignUpForm.jsx';
 
 class SignUpPage extends React.Component {
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         /*set initial component state*/
         this.state = {
             errors: {},
@@ -38,12 +38,12 @@ class SignUpPage extends React.Component {
        const formData = `name=${name}&email=${email}&password=${password}`;
 
        //create an AJAX request
-       const xhr = new XMLHttpRequest();
-       xhr.open('post', '/auth/signup');
-       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-       xhr.responseType = 'json';
-       xhr.addEventListener('load', () => {
-           if (xhr.status === 200) {
+       const xmlHttp = new XMLHttpRequest();
+       xmlHttp.open('post', '/auth/signup');
+       xmlHttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+       xmlHttp.responseType = 'json';
+       xmlHttp.addEventListener('load', () => {
+           if (xmlHttp.status === 200) {
                {/*change the component-container state*/}
                this.setState({
                    errors: {}
@@ -52,8 +52,8 @@ class SignUpPage extends React.Component {
                console.log('The form is valid');
            } else{
 
-            const errors = xhr.response.errors ? xhr.response.errors : {};
-            errors.summary = xhr.response.message;
+            const errors = xmlHttp.response.errors ? xmlHttp.response.errors : {};
+            errors.summary = xmlHttp.response.message;
 
             this.setState({
                 errors
@@ -61,10 +61,10 @@ class SignUpPage extends React.Component {
        }
            
     });
-    xhr.send(formData);
+    xmlHttp.send(formData);
     }
 
-    
+
     render() {
         return (
             <SignUpForm
@@ -76,5 +76,9 @@ class SignUpPage extends React.Component {
         );
     }
 }
+
+SignUpPage.contextTypes = {
+    router: PropTypes.object.isRequired
+};
 
 export default SignUpPage;

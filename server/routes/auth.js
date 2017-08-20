@@ -1,5 +1,6 @@
 const express = require('express');
 const validator = require('validator');
+const passport = require('passport');
 
 const router = new express.Router();
 
@@ -69,7 +70,30 @@ router.post('/signup', (req,res) => {
             errors: validationResult.errors
         });
     }
-    return res.status(200).end();
+
+    return passport.authenticate('local-signup', (err) => {
+        if (err) {
+            if (err.name === 'MongoError' && err.code === 11000) {
+                return res.status(409).json({
+                    success: false,
+                    message:'Check the form for errors.',
+                    errors: {
+                        email: 'This email is being used.  Try logging in.'
+                    }
+                });
+            }
+
+            return res.status(400).json({
+                success: false,
+                message:'Could not proocess the form.'
+            });
+        }
+
+        return res.status(200).json({
+            success: truw,
+            message: 'Success!  Now you can log in.'
+        });
+    })(req, res, next);
 });
 
 router.post('/login', (req, res) => {
@@ -81,7 +105,29 @@ router.post('/login', (req, res) => {
             errors: validationResult.errors
         });
     }
-    return res.status(200).end();
+
+    return passport.authenticate('local-login', (err, token, userData) => {
+        if (err) {
+            if (err.name === 'BadCredentials') {
+                return res.status(400).json({
+                    success: false,
+                    message: err.message
+                });
+            }
+
+            return RTCSessionDescription.status(400).json({
+                success: false,
+                message: 'could not process the form.'
+            });
+        }
+
+        return res.json({
+            success: true,
+            message: 'You\'ve successfully logged in!',
+            token, 
+            user: userData
+        });
+    })(req, res, next);
 });
 
 module.exports = router;
